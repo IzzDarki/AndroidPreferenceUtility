@@ -2,6 +2,7 @@ package com.bennet.preferenceutility
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.core.content.res.TypedArrayUtils
@@ -58,10 +59,10 @@ class ChoicePreference : Preference {
 
         val currentOption = getPersistedInt(0)
         for ((index, option) in options.withIndex()) {
-            val chip = layoutInflater.inflate(R.layout.choice_chip, null) as Chip
+            val chip = layoutInflater.inflate(R.layout.preference_choice_chip, chipGroup, false) as Chip
+
             chip.text = option
-            if (index == currentOption)
-                chip.isChecked = true
+            chip.isChecked = (index == currentOption)
 
             chip.setOnClickListener {
                 persistInt(index)
